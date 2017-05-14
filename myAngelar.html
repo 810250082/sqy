@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<link rel="stylesheet" href="./layui/css/layui.css">-->
+    <!--<script src="./layui/layui.js"></script>-->
+    <script  src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body ng-app="myAngular" ng-controller="myCtrl">
+名字：<input type="text" ng-model="inputText"/>
+<h1>{{inputText}}</h1>
+<h2>{{otherText}}</h2>
+<button ng-click="stop()">stop</button>
+<button ng-click="start()">start</button>
+<hr>
+<ol>
+    <li ng-repeat="i in person">{{i.name+"的年龄是： "+i.age}}</li>
+</ol>
+<hr>
+<select ng-init="selectName=person[0]" ng-model="selectName" ng-options="x.name for x in person">
+</select>
+<h2>{{"此人的名字是："+selectName.name}}</h2>
+<hr>
+<table>
+    <tr ng-repeat="x in person| orderBy:age:true">
+    <td>{{x.name}}</td>
+    <td>{{x.age}}</td>
+    </tr>
+</table>
+
+
+<script>
+    var myNG=angular.module("myAngular",[]);
+    myNG.controller("myCtrl",function($scope,$interval){
+            $scope.inputText=0;
+            $scope.$watch("inputText",function(){ $scope.sqy(); });
+            $scope.sqy=function(){
+                $scope.otherText=$scope.inputText+".sqy";
+            };
+
+            var jishi;
+            $scope.start=function(){
+                jishi=$interval(function () {
+                    $scope.inputText = $scope.inputText+1;
+                    $scope.otherText = $scope.inputText;
+//                    if($scope.inputText%10==0){
+//                        layui.use('layer', function(){
+//                            var layer = layui.layer;
+//                            layer.msg('开心每一天', {icon: 1});
+//                        });
+//                    }
+                }, 1000);
+            };
+            $scope.stop=function(){
+                $interval.cancel(jishi);
+            };
+            $scope.start();
+            $scope.person=[
+                {name:"jim",age:11},
+                {name:"tom",age:21},
+                {name:"peter",age:31},
+                {name:"lily",age:41}
+            ]
+        });
+    </script>
+</body>
+</html>

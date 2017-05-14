@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script  src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body ng-app="beiWang" ng-controller="myControl">
+<h1>我的备忘录</h1>
+<input type="text" placeholder="新增" ng-model="add"/><button ng-click="addItem()">新增</button>
+<table>
+    <tr ng-repeat="x in items">
+        <td><input type="checkbox" ng-model="x.check" /></td>
+        <td>{{x.name}}</td>
+    </tr>
+</table>
+<button ng-click="delItem()">删除记录</button>
+<script>
+    var myApp=angular.module("beiWang",[]);
+    myApp.controller("myControl",function($scope){
+        $scope.items=[{check:false,name:"Clean House"}];
+        $scope.addItem=function(){
+            var obj={check:false,name:$scope.add};
+            $scope.items.push(obj);
+        }
+        $scope.delItem=function(){
+            var arr=[];
+            for(var i in $scope.items){
+                if($scope.items[i].check){
+                    continue;
+                }
+                arr.push($scope.items[i]);
+            }
+            $scope.items=[];
+            $scope.items=arr;
+        }
+    });
+
+</script>
+</body>
+</html>

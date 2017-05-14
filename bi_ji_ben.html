@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script  src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <style>
+        textarea{
+            height: 100px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body ng-app="myNote" ng-controller="myCtrol">
+<h1>我的笔记</h1>
+<textarea ng-model="note"></textarea>
+<div>
+    <button ng-click="save()">保存</button>
+    <button ng-click="clear()">清除</button>
+</div>
+<p>剩余字数：{{100-note.length}}</p>
+<script>
+    var myApp=angular.module("myNote",[]);
+    myApp.controller("myCtrol",function($scope){
+        $scope.save=function(){
+            alert("保存成功");
+        }
+        $scope.clear=function(){
+            $scope.note="";
+        }
+    });
+</script>
+</body>
+</html>
