@@ -1,0 +1,6 @@
+#这是注释
+*.a
+!lib.a
+/toto
+skdlfj/
+doc/*.txt
