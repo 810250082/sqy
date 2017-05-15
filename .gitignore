@@ -4,3 +4,7 @@
 /toto
 skdlfj/
 doc/*.txt
+*.php
+*.js
+layer/
+layui/
